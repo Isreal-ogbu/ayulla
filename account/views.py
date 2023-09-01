@@ -17,7 +17,7 @@ class LoginViewSet(GenericViewSet, LoginView):
     def post(self, request, format=None):
         serializers = self.get_serializer(data=request.data)
         serializers.is_valid(raise_exception=True)
-        user = authenticate(request=request,email=serializers.validated_data['email'], password=serializers.validated_data['password'])
+        user = authenticate(request=request, email=serializers.validated_data['email'], password=serializers.validated_data['password'])
         login(request, user)
         return Response({"message": "success", "data": [user]}, status=status.HTTP_200_OK)
 
@@ -26,7 +26,7 @@ class LogoutViewSet(GenericViewSet):
 
     def post(self, request, format=None):
         logout(request.user)
-        return Response({"message": "success"},status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "success"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class RegisterViewSet(GenericViewSet):
