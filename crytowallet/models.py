@@ -6,7 +6,8 @@ User = get_user_model()
 
 # Create your models here.
 
-class Wallet(models.Model):
+class Crypto(models.Model):
+    # General cryto details
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=3)
     current_price = models.PositiveIntegerField()
@@ -14,5 +15,9 @@ class Wallet(models.Model):
 
 
 class UserCrytoWallet(models.Model):
-    name = models.ForeignKey(User, related_name='cryto_user', on_delete=models.CASCADE)
-    crypto_currency = models.ForeignKey(Wallet, on_delete=models.CASCADE)
+    # User cryto account
+    name = models.ForeignKey(User, related_name='usercryptowallet', on_delete=models.CASCADE)
+    crypto_currency = models.ForeignKey(Crypto, related_name='usercryptowallet', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
